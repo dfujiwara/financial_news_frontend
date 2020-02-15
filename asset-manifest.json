@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/financial_news_frontend/static/css/main.d1b05096.chunk.css",
+    "main.js": "/financial_news_frontend/static/js/main.4cd6da98.chunk.js",
+    "main.js.map": "/financial_news_frontend/static/js/main.4cd6da98.chunk.js.map",
+    "runtime-main.js": "/financial_news_frontend/static/js/runtime-main.6983d207.js",
+    "runtime-main.js.map": "/financial_news_frontend/static/js/runtime-main.6983d207.js.map",
+    "static/js/2.9d34efe7.chunk.js": "/financial_news_frontend/static/js/2.9d34efe7.chunk.js",
+    "static/js/2.9d34efe7.chunk.js.map": "/financial_news_frontend/static/js/2.9d34efe7.chunk.js.map",
+    "index.html": "/financial_news_frontend/index.html",
+    "precache-manifest.48c0a9452f396fbf9bf3faf1bf54ca3d.js": "/financial_news_frontend/precache-manifest.48c0a9452f396fbf9bf3faf1bf54ca3d.js",
+    "service-worker.js": "/financial_news_frontend/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/financial_news_frontend/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.9d34efe7.chunk.js.LICENSE.txt": "/financial_news_frontend/static/js/2.9d34efe7.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/financial_news_frontend/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6983d207.js",
+    "static/js/2.9d34efe7.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.4cd6da98.chunk.js"
+  ]
+}
