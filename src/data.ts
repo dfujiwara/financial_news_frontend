@@ -9,20 +9,24 @@ interface DataInterface {
 }
 
 interface DataResponse {
-    results: DataInterface[]
+  results: DataInterface[]
 }
 
 interface AggregatedData {
-    data: DataInterface[]
-    sentiment: {score: number, magnitude: number}
+  data: DataInterface[]
+  sentiment: {score: number, magnitude: number}
 }
 
-export async function fetchData() {
+export interface Result extends AggregatedData {
+  date: Date
+}
+
+export async function fetchData(): Promise<Result[]> {
     try {
       const response = await fetch(url)
       if (response.status !== 200) {
-        console.error(`Unexpected status code: ${response.status}`)
-        return
+        const error = new Error(`Unexpected status code: ${response.status}`)
+        throw error
       }
       const { results }= await response.json() as DataResponse
       const parsedResult = parseData(results)
@@ -36,6 +40,7 @@ export async function fetchData() {
       return dataResult
     } catch(e) {
       console.error(`error happened: ${e}`)
+      throw e
     }
 }
 
