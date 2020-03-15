@@ -1,27 +1,74 @@
 import React from 'react';
+import { Line } from "react-chartjs-2";
 import logo from './logo.svg';
 import './App.css';
+import { fetchData } from './data'
 
-const url = "https://us-central1-df-side-projects.cloudfunctions.net/news-rss-http"
 
-class App extends React.Component<{}> {
-  async componentDidMount() {
-    try {
-      const response = await fetch(url)
-      console.log(response)
-    } catch(e) {
-      console.log(`error happened: ${e}`)
+const data = {
+  labels: [],
+  datasets: [
+    {
+      label: 'News sentiment',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: []
     }
+  ]
+}
+
+interface GraphData {
+  labels: string[],
+  datasets: {label: string, data: number[]}[]
+}
+
+interface AppState {
+  graphData: GraphData
+}
+
+class App extends React.Component<{}, AppState> {
+  constructor(props: {}) {
+    super(props)
+    this.state = { graphData: data }
+    this.selectDay = this.selectDay.bind(this)
   }
+
+  async componentDidMount() {
+    const results = await fetchData()
+    console.log(results)
+    const labels = results.map(result => result.date.toLocaleDateString())
+    const data = results.map(result => result.sentiment.score)
+    this.setState((prev) => {
+      prev.graphData.labels = labels
+      prev.graphData.datasets[0].data = data
+      return prev
+    })
+  }
+
+  selectDay(element: any) {
+    console.log(element)
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-            Hello world! YYOY!!!
-          </p>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -30,6 +77,7 @@ class App extends React.Component<{}> {
           >
             Learn React
           </a>
+          <Line data={data} getElementAtEvent={element => this.selectDay(element)} />
         </header>
       </div>
     )
