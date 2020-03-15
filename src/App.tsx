@@ -2,8 +2,8 @@ import React from 'react';
 import { Line } from "react-chartjs-2";
 import logo from './logo.svg';
 import './App.css';
-import { fetchData } from './data'
-
+import { fetchData, Result } from './data'
+import { ResultTable } from './Table'
 
 const data = {
   labels: [],
@@ -39,12 +39,14 @@ interface GraphData {
 
 interface AppState {
   graphData: GraphData
+  results: Result[]
+  selectedResult: Result | null
 }
 
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
-    this.state = { graphData: data }
+    this.state = { graphData: data, results: [], selectedResult: null }
     this.selectDay = this.selectDay.bind(this)
   }
 
@@ -56,7 +58,7 @@ class App extends React.Component<{}, AppState> {
     this.setState((prev) => {
       prev.graphData.labels = labels
       prev.graphData.datasets[0].data = data
-      return prev
+      return { graphData: prev.graphData, results, selectedResult: results[0] }
     })
   }
 
@@ -65,6 +67,7 @@ class App extends React.Component<{}, AppState> {
   }
 
   render() {
+    const { selectedResult } = this.state
     return (
       <div className="App">
         <header className="App-header">
@@ -78,6 +81,7 @@ class App extends React.Component<{}, AppState> {
             Learn React
           </a>
           <Line data={data} getElementAtEvent={element => this.selectDay(element)} />
+          { selectedResult && ResultTable(selectedResult) }
         </header>
       </div>
     )
