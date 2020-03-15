@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Tooltip from '@material-ui/core/Tooltip'
 import Paper from '@material-ui/core/Paper'
 import { Result } from './data'
 
@@ -49,7 +50,9 @@ export function ResultTable(result: Result) {
                             </TableCell>
                             <TableCell align="left">{currentDate.toLocaleString()}</TableCell>
                             <TableCell align="left">{row.contentSnippet}</TableCell>
-                            <TableCell align="left">{evaluateSentiment(row.sentimentResult.score)} {row.sentimentResult.score}</TableCell>
+                            <Tooltip title={row.sentimentResult.score.toFixed(3)} placement="left" >
+                                <TableCell align="left">{evaluateSentiment(row.sentimentResult.score)}</TableCell>
+                            </Tooltip>
                         </TableRow>
                         )
                     }
