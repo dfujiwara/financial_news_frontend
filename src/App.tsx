@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { fetchData, Result } from './data'
 import { ResultTable } from './Table'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const data = {
   labels: [],
@@ -39,14 +40,14 @@ interface GraphData {
 
 interface AppState {
   graphData: GraphData
-  results: Result[]
+  results: Result[] | null
   selectedIndex: number | null
 }
 
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
-    this.state = { graphData: data, results: [], selectedIndex: null }
+    this.state = { graphData: data, results: null, selectedIndex: null }
     this.selectDay = this.selectDay.bind(this)
   }
 
@@ -72,15 +73,17 @@ class App extends React.Component<{}, AppState> {
 
   render() {
     const { results, selectedIndex } = this.state
-    const selectedResult = selectedIndex ? results[selectedIndex] : null
+    const selectedResult = results && selectedIndex ? results[selectedIndex] : null
     return (
-      <div className="App App-header">
-        <header>
-          Financial News
-        </header>
-        <Line data={data} getElementAtEvent={element => this.selectDay(element)} />
-        { selectedResult && ResultTable(selectedResult) }
-      </div>
+        <div className="App App-header">
+            <header>Financial News</header>
+            {results ? (
+                <Line data={data} getElementAtEvent={element => this.selectDay(element)} />
+            ) : (
+                <CircularProgress />
+            )}
+            {selectedResult && ResultTable(selectedResult)}
+        </div>
     )
   }
 }
