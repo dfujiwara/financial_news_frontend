@@ -15,6 +15,16 @@ const useStyles = makeStyles({
     },
 })
 
+const evaluateSentiment = (sentimentScore: number) => {
+    if (sentimentScore > 0) {
+        return '👍'
+    }
+    if (sentimentScore < 0) {
+        return '👎'
+    }
+    return '🤔'
+}
+
 export function ResultTable(result: Result) {
     //const classes = useStyles()
 
@@ -26,6 +36,7 @@ export function ResultTable(result: Result) {
                         <TableCell align="left">Title</TableCell>
                         <TableCell align="left">Date</TableCell>
                         <TableCell align="left">Summary</TableCell>
+                        <TableCell align="left">Sentiment</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -38,6 +49,7 @@ export function ResultTable(result: Result) {
                             </TableCell>
                             <TableCell align="left">{currentDate.toLocaleString()}</TableCell>
                             <TableCell align="left">{row.contentSnippet}</TableCell>
+                            <TableCell align="left">{evaluateSentiment(row.sentimentResult.score)} {row.sentimentResult.score}</TableCell>
                         </TableRow>
                         )
                     }

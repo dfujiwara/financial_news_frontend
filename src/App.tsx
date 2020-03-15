@@ -40,13 +40,13 @@ interface GraphData {
 interface AppState {
   graphData: GraphData
   results: Result[]
-  selectedResult: Result | null
+  selectedIndex: number | null
 }
 
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
-    this.state = { graphData: data, results: [], selectedResult: null }
+    this.state = { graphData: data, results: [], selectedIndex: null }
     this.selectDay = this.selectDay.bind(this)
   }
 
@@ -58,16 +58,21 @@ class App extends React.Component<{}, AppState> {
     this.setState((prev) => {
       prev.graphData.labels = labels
       prev.graphData.datasets[0].data = data
-      return { graphData: prev.graphData, results, selectedResult: results[0] }
+      return { graphData: prev.graphData, results }
     })
   }
 
   selectDay(element: any) {
-    console.log(element)
+    if (element.length === 0) {
+      return
+    }
+    const index = element[0]._index
+    this.setState({ selectedIndex: index})
   }
 
   render() {
-    const { selectedResult } = this.state
+    const { results, selectedIndex } = this.state
+    const selectedResult = selectedIndex ? results[selectedIndex] : null
     return (
       <div className="App App-header">
         <header>
