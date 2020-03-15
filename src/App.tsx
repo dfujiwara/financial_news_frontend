@@ -69,20 +69,12 @@ class App extends React.Component<{}, AppState> {
   render() {
     const { selectedResult } = this.state
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <Line data={data} getElementAtEvent={element => this.selectDay(element)} />
-          { selectedResult && ResultTable(selectedResult) }
+      <div className="App App-header">
+        <header>
+          Financial News
         </header>
+        <Line data={data} getElementAtEvent={element => this.selectDay(element)} />
+        { selectedResult && ResultTable(selectedResult) }
       </div>
     )
   }
