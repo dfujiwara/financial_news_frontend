@@ -49,8 +49,7 @@ const App = () => {
       const labels = results.map(result => result.date.toLocaleDateString())
       const data = results.map(result => result.sentiment.score)
       setResults(results)
-      const datasets = [{...dataSetProperties, data}]
-      setGraphData({labels, datasets})
+      setGraphData({labels, datasets: [{...dataSetProperties, data}]})
     })()
   }, [])
 
