@@ -32,10 +32,8 @@ interface GraphData {
 }
 
 const App = () => {
-  const initialResults = null as Result[] | null
-  const [ results, setResults ] = useState(initialResults)
-  const initialSelectedIndex = null as number | null
-  const [ selectedIndex, setSelectedIndex ] = useState(initialSelectedIndex)
+  const [ results, setResults ] = useState(null as Result[] | null)
+  const [ selectedIndex, setSelectedIndex ] = useState(null as number | null)
   const [ graphData, setGraphData ] = useState({labels: [], datasets: []} as GraphData)
   const selectDay =(element: any) => {
     if (element.length === 0) {
