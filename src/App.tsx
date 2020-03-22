@@ -73,7 +73,7 @@ class App extends React.Component<{}, AppState> {
 
   render() {
     const { results, selectedIndex } = this.state
-    const selectedResult = results && selectedIndex ? results[selectedIndex] : null
+    const selectedResult = results && selectedIndex !== null ? results[selectedIndex] : null
     return (
         <div className="App App-header">
             <header>Financial News</header>
