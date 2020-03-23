@@ -60,7 +60,7 @@ const App = () => {
           {results ? (
               <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
           ) : (
-              <CircularProgress />
+              <CircularProgress className="loader"/>
           )}
           {selectedResult && ResultTable(selectedResult)}
       </div>
