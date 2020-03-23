@@ -44,19 +44,18 @@ export function ResultTable(result: Result) {
                     {result.data.map(row => {
                         const currentDate = new Date(row.date)
                         return (
-                        <TableRow key={row.link}>
-                            <TableCell component="th" scope="row">
-                                <a href={row.link}>{row.title}</a>
-                            </TableCell>
-                            <TableCell align="left">{currentDate.toLocaleString()}</TableCell>
-                            <TableCell align="left">{row.contentSnippet}</TableCell>
-                            <Tooltip title={row.sentimentResult.score.toFixed(3)} placement="left" >
-                                <TableCell align="left">{evaluateSentiment(row.sentimentResult.score)}</TableCell>
-                            </Tooltip>
-                        </TableRow>
+                            <TableRow key={row.link}>
+                                <TableCell component="th" scope="row">
+                                    <a href={row.link}>{row.title}</a>
+                                </TableCell>
+                                <TableCell align="left">{currentDate.toLocaleString()}</TableCell>
+                                <TableCell align="left">{row.contentSnippet}</TableCell>
+                                <Tooltip title={row.sentimentResult.score.toFixed(3)} placement="left">
+                                    <TableCell align="left">{evaluateSentiment(row.sentimentResult.score)}</TableCell>
+                                </Tooltip>
+                            </TableRow>
                         )
-                    }
-                    )}
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

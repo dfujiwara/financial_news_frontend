@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Line } from "react-chartjs-2";
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { Line } from 'react-chartjs-2'
+import './App.css'
 import { fetchData, Result } from './data'
 import { ResultTable } from './Table'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -27,44 +27,44 @@ const dataSetProperties = {
 }
 
 interface GraphData {
-  labels: string[],
-  datasets: {label: string, data: number[]}[]
+    labels: string[]
+    datasets: { label: string; data: number[] }[]
 }
 
 const App = () => {
-  const [ results, setResults ] = useState(null as Result[] | null)
-  const [ selectedIndex, setSelectedIndex ] = useState(null as number | null)
-  const [ graphData, setGraphData ] = useState({labels: [], datasets: []} as GraphData)
-  const selectDay =(element: any) => {
-    if (element.length === 0) {
-      return
+    const [results, setResults] = useState(null as Result[] | null)
+    const [selectedIndex, setSelectedIndex] = useState(null as number | null)
+    const [graphData, setGraphData] = useState({ labels: [], datasets: [] } as GraphData)
+    const selectDay = (element: any) => {
+        if (element.length === 0) {
+            return
+        }
+        const index = element[0]._index
+        setSelectedIndex(index)
     }
-    const index = element[0]._index
-    setSelectedIndex(index)
-  }
 
-  useEffect(() => {
-    (async () => {
-      const results = await fetchData()
-      const labels = results.map(result => result.date.toLocaleDateString())
-      const data = results.map(result => result.sentiment.score)
-      setResults(results)
-      setGraphData({labels, datasets: [{...dataSetProperties, data}]})
-    })()
-  }, [])
+    useEffect(() => {
+        ;(async () => {
+            const results = await fetchData()
+            const labels = results.map(result => result.date.toLocaleDateString())
+            const data = results.map(result => result.sentiment.score)
+            setResults(results)
+            setGraphData({ labels, datasets: [{ ...dataSetProperties, data }] })
+        })()
+    }, [])
 
-  const selectedResult = results && selectedIndex !== null ? results[selectedIndex] : null
-  return (
-      <div className="App App-header">
-          <header>Financial News</header>
-          {results ? (
-              <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
-          ) : (
-              <CircularProgress className="loader"/>
-          )}
-          {selectedResult && ResultTable(selectedResult)}
-      </div>
-  )
+    const selectedResult = results && selectedIndex !== null ? results[selectedIndex] : null
+    return (
+        <div className="App App-header">
+            <header>Financial News</header>
+            {results ? (
+                <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
+            ) : (
+                <CircularProgress className="loader" />
+            )}
+            {selectedResult && ResultTable(selectedResult)}
+        </div>
+    )
 }
 
-export default App;
+export default App
