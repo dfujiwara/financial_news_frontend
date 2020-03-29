@@ -58,11 +58,13 @@ const App = () => {
         <div className="App App-header">
             <header>Financial News</header>
             {results ? (
-                <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
+                <div className="graph">
+                    <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
+                </div>
             ) : (
                 <CircularProgress className="loader" />
             )}
-            <div className="table">{selectedResult && ResultTable(selectedResult)}</div>
+            <div className="table">{ResultTable(selectedResult)}</div>
         </div>
     )
 }
