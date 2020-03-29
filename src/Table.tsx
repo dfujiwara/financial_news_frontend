@@ -7,12 +7,18 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Tooltip from '@material-ui/core/Tooltip'
-import Paper from '@material-ui/core/Paper'
+import Link from '@material-ui/core/Link'
 import { Result } from './data'
 
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
+    },
+    text: {
+        color: 'white',
+    },
+    link: {
+        color: 'white',
     },
 })
 
@@ -26,18 +32,27 @@ const evaluateSentiment = (sentimentScore: number) => {
     return '🤔'
 }
 
-export function ResultTable(result: Result) {
-    //const classes = useStyles()
+export function ResultTable(result: Result | null) {
+    const classes = useStyles()
 
+    if (!result) {
+        return null
+    }
+    const createTableCell = (cellLabel: string) => {
+        return (
+            <TableCell className={classes.text} align="left">
+                {cellLabel}
+            </TableCell>
+        )
+    }
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="simple table">
+        <TableContainer>
+            <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">Title</TableCell>
-                        <TableCell align="left">Date</TableCell>
-                        <TableCell align="left">Summary</TableCell>
-                        <TableCell align="left">Sentiment</TableCell>
+                        {['Title', 'Date', 'Summary', 'Sentiment'].map(label => {
+                            return createTableCell(label)
+                        })}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -45,13 +60,13 @@ export function ResultTable(result: Result) {
                         const currentDate = new Date(row.date)
                         return (
                             <TableRow key={row.link}>
-                                <TableCell component="th" scope="row">
-                                    <a href={row.link}>{row.title}</a>
+                                <TableCell component="th" scope="row" className={classes.text}>
+                                    <Link href={row.link}>{row.title}</Link>
                                 </TableCell>
-                                <TableCell align="left">{currentDate.toLocaleString()}</TableCell>
-                                <TableCell align="left">{row.contentSnippet}</TableCell>
+                                {createTableCell(currentDate.toLocaleString())}
+                                {createTableCell(row.contentSnippet)}
                                 <Tooltip title={row.sentimentResult.score.toFixed(3)} placement="left">
-                                    <TableCell align="left">{evaluateSentiment(row.sentimentResult.score)}</TableCell>
+                                    {createTableCell(evaluateSentiment(row.sentimentResult.score))}
                                 </Tooltip>
                             </TableRow>
                         )
