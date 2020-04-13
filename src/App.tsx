@@ -64,7 +64,9 @@ const App = () => {
             ) : (
                 <CircularProgress className="loader" />
             )}
-            <div className="table">{ResultTable(selectedResult)}</div>
+            <div className="table">
+                <ResultTable result={selectedResult} />
+            </div>
         </div>
     )
 }
