@@ -32,7 +32,11 @@ const evaluateSentiment = (sentimentScore: number) => {
     return '🤔'
 }
 
-export function ResultTable(result: Result | null) {
+interface ResultTableProps {
+    result: Result | null
+}
+
+export function ResultTable({ result }: ResultTableProps) {
     const classes = useStyles()
 
     if (!result) {
