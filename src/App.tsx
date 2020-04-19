@@ -4,6 +4,7 @@ import './App.css'
 import { fetchData, Result } from './data'
 import { ResultTable } from './Table'
 import { DatePicker } from './DatePicker'
+import { useDebounce } from './hooks'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -38,6 +39,7 @@ const App = (): JSX.Element => {
     const [selectedIndex, setSelectedIndex] = useState(null as number | null)
     const [graphData, setGraphData] = useState({ labels: [], datasets: [] } as GraphData)
     const [selectedDate, setSelectedDate] = useState(new Date())
+    const debouncedSelectedDate = useDebounce(selectedDate, 1000)
     const selectDate = (elements: { _index: number }[]): void => {
         if (elements.length === 0) {
             return
@@ -48,13 +50,13 @@ const App = (): JSX.Element => {
 
     useEffect((): void => {
         ;(async (): Promise<void> => {
-            const results = await fetchData(selectedDate)
+            const results = await fetchData(debouncedSelectedDate)
             const labels = results.map(result => result.date.toLocaleDateString())
             const data = results.map(result => result.sentiment.score)
             setResults(results)
             setGraphData({ labels, datasets: [{ ...dataSetProperties, data }] })
         })()
-    }, [selectedDate])
+    }, [debouncedSelectedDate])
 
     const selectedResult = results && selectedIndex !== null ? results[selectedIndex] : null
     return (
@@ -62,7 +64,7 @@ const App = (): JSX.Element => {
             <header>Financial News</header>
             {results ? (
                 <div className="graph">
-                    <DatePicker selectedDate={selectedDate} updateDate={setSelectedDate} />
+                    <DatePicker selectedDate={debouncedSelectedDate} updateDate={setSelectedDate} />
                     <Line data={graphData} getElementAtEvent={(element): void => selectDate(element)} />
                 </div>
             ) : (
