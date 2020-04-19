@@ -3,6 +3,8 @@ import { Line } from 'react-chartjs-2'
 import './App.css'
 import { fetchData, Result } from './data'
 import { ResultTable } from './Table'
+import { DatePicker } from './DatePicker'
+
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 const dataSetProperties = {
@@ -59,6 +61,7 @@ const App = () => {
             <header>Financial News</header>
             {results ? (
                 <div className="graph">
+                    <DatePicker updateDate={date => console.log(date)} />
                     <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
                 </div>
             ) : (
