@@ -1,5 +1,3 @@
-const url = 'https://us-central1-df-side-projects.cloudfunctions.net/news-rss-http'
-
 interface DataInterface {
     title: string
     link: string
@@ -46,9 +44,17 @@ function aggregateData(data: DataInterface[]): AggregatedData {
     }
 }
 
-export async function fetchData(): Promise<Result[]> {
+function constructURL(fromDate: Date): URL {
+    const url = 'https://us-central1-df-side-projects.cloudfunctions.net/news-rss-http'
+    const datedURL = new URL(url)
+    datedURL.searchParams.append('fromDateString', fromDate.toISOString())
+    return datedURL
+}
+
+export async function fetchData(fromDate: Date = new Date()): Promise<Result[]> {
     try {
-        const response = await fetch(url)
+        const datedURL = constructURL(fromDate)
+        const response = await fetch(datedURL.toString())
         if (response.status !== 200) {
             const error = new Error(`Unexpected status code: ${response.status}`)
             throw error
