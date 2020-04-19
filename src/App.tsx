@@ -37,7 +37,8 @@ const App = () => {
     const [results, setResults] = useState(null as Result[] | null)
     const [selectedIndex, setSelectedIndex] = useState(null as number | null)
     const [graphData, setGraphData] = useState({ labels: [], datasets: [] } as GraphData)
-    const selectDay = (element: any) => {
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const selectDate = (element: any) => {
         if (element.length === 0) {
             return
         }
@@ -47,13 +48,13 @@ const App = () => {
 
     useEffect(() => {
         ;(async () => {
-            const results = await fetchData()
+            const results = await fetchData(selectedDate)
             const labels = results.map(result => result.date.toLocaleDateString())
             const data = results.map(result => result.sentiment.score)
             setResults(results)
             setGraphData({ labels, datasets: [{ ...dataSetProperties, data }] })
         })()
-    }, [])
+    }, [selectedDate])
 
     const selectedResult = results && selectedIndex !== null ? results[selectedIndex] : null
     return (
@@ -61,8 +62,8 @@ const App = () => {
             <header>Financial News</header>
             {results ? (
                 <div className="graph">
-                    <DatePicker updateDate={date => console.log(date)} />
-                    <Line data={graphData} getElementAtEvent={element => selectDay(element)} />
+                    <DatePicker selectedDate={selectedDate} updateDate={setSelectedDate} />
+                    <Line data={graphData} getElementAtEvent={element => selectDate(element)} />
                 </div>
             ) : (
                 <CircularProgress className="loader" />

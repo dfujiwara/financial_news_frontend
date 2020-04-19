@@ -21,12 +21,12 @@ interface EventInterface {
 }
 
 interface DatePickerProps {
+    selectedDate: Date
     updateDate(date: Date): void
 }
 
-export function DatePicker({ updateDate }: DatePickerProps) {
+export function DatePicker({ selectedDate, updateDate }: DatePickerProps) {
     const [errorFlag, setErrorFlag] = useState(false)
-    const [selectedDate, setSelectedDate] = useState(new Date())
 
     const handler = (event: EventInterface) => {
         const dateString = event.target.value
@@ -36,25 +36,22 @@ export function DatePicker({ updateDate }: DatePickerProps) {
             return
         }
         setErrorFlag(false)
-        setSelectedDate(potentialDate)
         updateDate(potentialDate)
     }
 
     const classes = useStyles()
     return (
-        <form className={classes.container} noValidate>
-            <TextField
-                id="date"
-                label="Start Date"
-                type="date"
-                defaultValue={selectedDate.toLocaleDateString()}
-                className={classes.textField}
-                onChange={handler}
-                error={errorFlag}
-                InputLabelProps={{
-                    shrink: true,
-                }}
-            />
-        </form>
+        <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={selectedDate.toLocaleDateString()}
+            className={classes.textField}
+            onChange={handler}
+            error={errorFlag}
+            InputLabelProps={{
+                shrink: true,
+            }}
+        />
     )
 }
