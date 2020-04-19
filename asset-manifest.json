@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/financial_news_frontend/static/css/main.a89044c4.chunk.css",
-    "main.js": "/financial_news_frontend/static/js/main.9b1fe070.chunk.js",
-    "main.js.map": "/financial_news_frontend/static/js/main.9b1fe070.chunk.js.map",
+    "main.js": "/financial_news_frontend/static/js/main.5ba1709e.chunk.js",
+    "main.js.map": "/financial_news_frontend/static/js/main.5ba1709e.chunk.js.map",
     "runtime-main.js": "/financial_news_frontend/static/js/runtime-main.6983d207.js",
     "runtime-main.js.map": "/financial_news_frontend/static/js/runtime-main.6983d207.js.map",
-    "static/js/2.0a05f43c.chunk.js": "/financial_news_frontend/static/js/2.0a05f43c.chunk.js",
-    "static/js/2.0a05f43c.chunk.js.map": "/financial_news_frontend/static/js/2.0a05f43c.chunk.js.map",
+    "static/js/2.b61c0929.chunk.js": "/financial_news_frontend/static/js/2.b61c0929.chunk.js",
+    "static/js/2.b61c0929.chunk.js.map": "/financial_news_frontend/static/js/2.b61c0929.chunk.js.map",
     "index.html": "/financial_news_frontend/index.html",
-    "precache-manifest.f1fdc1295f013bda24a65b262454fd38.js": "/financial_news_frontend/precache-manifest.f1fdc1295f013bda24a65b262454fd38.js",
+    "precache-manifest.f8977f8e99378c66806ccf71b347c384.js": "/financial_news_frontend/precache-manifest.f8977f8e99378c66806ccf71b347c384.js",
     "service-worker.js": "/financial_news_frontend/service-worker.js",
     "static/css/main.a89044c4.chunk.css.map": "/financial_news_frontend/static/css/main.a89044c4.chunk.css.map",
-    "static/js/2.0a05f43c.chunk.js.LICENSE.txt": "/financial_news_frontend/static/js/2.0a05f43c.chunk.js.LICENSE.txt"
+    "static/js/2.b61c0929.chunk.js.LICENSE.txt": "/financial_news_frontend/static/js/2.b61c0929.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6983d207.js",
-    "static/js/2.0a05f43c.chunk.js",
+    "static/js/2.b61c0929.chunk.js",
     "static/css/main.a89044c4.chunk.css",
-    "static/js/main.9b1fe070.chunk.js"
+    "static/js/main.5ba1709e.chunk.js"
   ]
 }

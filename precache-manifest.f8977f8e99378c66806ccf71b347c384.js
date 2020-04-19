@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7af31c0520aaa56430895a58174e63f0",
+    "revision": "a792e9e58242cfcf8cfb42fe980d8eaf",
     "url": "/financial_news_frontend/index.html"
   },
   {
-    "revision": "eb1e5d928c0b0f9ead3a",
+    "revision": "c8d3923d858f8efbb72e",
     "url": "/financial_news_frontend/static/css/main.a89044c4.chunk.css"
   },
   {
-    "revision": "ab7fe8e48ce967f38c97",
-    "url": "/financial_news_frontend/static/js/2.0a05f43c.chunk.js"
+    "revision": "a351b691eee212d29af6",
+    "url": "/financial_news_frontend/static/js/2.b61c0929.chunk.js"
   },
   {
     "revision": "af0cc96de27d305dd3487fdad1febf04",
-    "url": "/financial_news_frontend/static/js/2.0a05f43c.chunk.js.LICENSE.txt"
+    "url": "/financial_news_frontend/static/js/2.b61c0929.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eb1e5d928c0b0f9ead3a",
-    "url": "/financial_news_frontend/static/js/main.9b1fe070.chunk.js"
+    "revision": "c8d3923d858f8efbb72e",
+    "url": "/financial_news_frontend/static/js/main.5ba1709e.chunk.js"
   },
   {
     "revision": "0ab8484b5fe8894b06fc",
