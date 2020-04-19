@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     },
 })
 
-const evaluateSentiment = (sentimentScore: number) => {
+const evaluateSentiment = (sentimentScore: number): string => {
     if (sentimentScore > 0) {
         return '👍'
     }
@@ -36,13 +36,13 @@ interface ResultTableProps {
     result: Result | null
 }
 
-export function ResultTable({ result }: ResultTableProps) {
+export function ResultTable({ result }: ResultTableProps): JSX.Element | null {
     const classes = useStyles()
 
     if (!result) {
         return null
     }
-    const createTableCell = (cellLabel: string) => {
+    const createTableCell = (cellLabel: string): JSX.Element => {
         return (
             <TableCell className={classes.text} align="left">
                 {cellLabel}

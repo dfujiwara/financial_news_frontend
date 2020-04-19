@@ -33,21 +33,21 @@ interface GraphData {
     datasets: { label: string; data: number[] }[]
 }
 
-const App = () => {
+const App = (): JSX.Element => {
     const [results, setResults] = useState(null as Result[] | null)
     const [selectedIndex, setSelectedIndex] = useState(null as number | null)
     const [graphData, setGraphData] = useState({ labels: [], datasets: [] } as GraphData)
     const [selectedDate, setSelectedDate] = useState(new Date())
-    const selectDate = (element: any) => {
-        if (element.length === 0) {
+    const selectDate = (elements: { _index: number }[]): void => {
+        if (elements.length === 0) {
             return
         }
-        const index = element[0]._index
+        const index = elements[0]._index
         setSelectedIndex(index)
     }
 
-    useEffect(() => {
-        ;(async () => {
+    useEffect((): void => {
+        ;(async (): Promise<void> => {
             const results = await fetchData(selectedDate)
             const labels = results.map(result => result.date.toLocaleDateString())
             const data = results.map(result => result.sentiment.score)
@@ -63,7 +63,7 @@ const App = () => {
             {results ? (
                 <div className="graph">
                     <DatePicker selectedDate={selectedDate} updateDate={setSelectedDate} />
-                    <Line data={graphData} getElementAtEvent={element => selectDate(element)} />
+                    <Line data={graphData} getElementAtEvent={(element): void => selectDate(element)} />
                 </div>
             ) : (
                 <CircularProgress className="loader" />

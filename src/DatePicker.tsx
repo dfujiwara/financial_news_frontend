@@ -25,10 +25,10 @@ interface DatePickerProps {
     updateDate(date: Date): void
 }
 
-export function DatePicker({ selectedDate, updateDate }: DatePickerProps) {
+export function DatePicker({ selectedDate, updateDate }: DatePickerProps): JSX.Element {
     const [errorFlag, setErrorFlag] = useState(false)
 
-    const handler = (event: EventInterface) => {
+    const handler = (event: EventInterface): void => {
         const dateString = event.target.value
         const potentialDate = new Date(dateString)
         if (isNaN(potentialDate.getTime())) {
