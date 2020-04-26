@@ -47,7 +47,9 @@ function aggregateData(data: DataInterface[]): AggregatedData {
 function constructURL(fromDate: Date): URL {
     const url = 'https://us-central1-df-side-projects.cloudfunctions.net/news-rss-http'
     const datedURL = new URL(url)
-    datedURL.searchParams.append('fromDateString', fromDate.toISOString())
+    // Normalize to the date
+    const dateToday = new Date(fromDate.toLocaleDateString())
+    datedURL.searchParams.append('fromDateString', dateToday.toISOString())
     return datedURL
 }
 
