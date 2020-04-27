@@ -32,6 +32,12 @@
   margin-top: 50px;
 }
 
+.picker {
+  align-self: flex-start;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
 .graph {
   width: 98%;
   padding-top: 25px;

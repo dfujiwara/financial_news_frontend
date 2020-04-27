@@ -13,6 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
             marginRight: theme.spacing(1),
             width: 200,
         },
+        label: {
+            color: 'white',
+        },
+        input: {
+            color: 'white',
+        },
     }),
 )
 
@@ -51,7 +57,9 @@ export function DatePicker({ selectedDate, updateDate }: DatePickerProps): JSX.E
             error={errorFlag}
             InputLabelProps={{
                 shrink: true,
+                className: classes.label,
             }}
+            InputProps={{ className: classes.input }}
         />
     )
 }
