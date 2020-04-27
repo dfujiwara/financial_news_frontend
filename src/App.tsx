@@ -63,10 +63,14 @@ const App = (): JSX.Element => {
         <div className="App App-header">
             <header>Financial News</header>
             {results ? (
-                <div className="graph">
-                    <DatePicker selectedDate={debouncedSelectedDate} updateDate={setSelectedDate} />
-                    <Line data={graphData} getElementAtEvent={(element): void => selectDate(element)} />
-                </div>
+                <>
+                    <div className="picker">
+                        <DatePicker selectedDate={debouncedSelectedDate} updateDate={setSelectedDate} />
+                    </div>
+                    <div className="graph">
+                        <Line data={graphData} getElementAtEvent={(element): void => selectDate(element)} />
+                    </div>
+                </>
             ) : (
                 <CircularProgress className="loader" />
             )}
