@@ -42,9 +42,9 @@ export function ResultTable({ result }: ResultTableProps): JSX.Element | null {
     if (!result) {
         return null
     }
-    const createTableCell = (cellLabel: string): JSX.Element => {
+    const createTableCell = (cellLabel: string, key: string): JSX.Element => {
         return (
-            <TableCell className={classes.text} align="left">
+            <TableCell className={classes.text} align="left" key={key}>
                 {cellLabel}
             </TableCell>
         )
@@ -55,7 +55,7 @@ export function ResultTable({ result }: ResultTableProps): JSX.Element | null {
                 <TableHead>
                     <TableRow>
                         {['Title', 'Date', 'Summary', 'Sentiment'].map(label => {
-                            return createTableCell(label)
+                            return createTableCell(label, label)
                         })}
                     </TableRow>
                 </TableHead>
@@ -64,13 +64,16 @@ export function ResultTable({ result }: ResultTableProps): JSX.Element | null {
                         const currentDate = new Date(row.date)
                         return (
                             <TableRow key={row.link}>
-                                <TableCell component="th" scope="row" className={classes.text}>
+                                <TableCell key={row.link + 'link'} component="th" scope="row" className={classes.text}>
                                     <Link href={row.link}>{row.title}</Link>
                                 </TableCell>
-                                {createTableCell(currentDate.toLocaleString())}
-                                {createTableCell(row.contentSnippet)}
+                                {createTableCell(currentDate.toLocaleString(), `${row.link}-date`)}
+                                {createTableCell(row.contentSnippet, `${row.link}-snippet`)}
                                 <Tooltip title={row.sentimentResult.score.toFixed(3)} placement="left">
-                                    {createTableCell(evaluateSentiment(row.sentimentResult.score))}
+                                    {createTableCell(
+                                        evaluateSentiment(row.sentimentResult.score),
+                                        `${row.link}-sentiment`,
+                                    )}
                                 </Tooltip>
                             </TableRow>
                         )
