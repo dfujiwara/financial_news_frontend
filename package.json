@@ -35,7 +35,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "eslint src --ext ts --ext tsx",
-    "ci": "npm run lint"
+    "ci": "npm run lint && npm run build && npm run test"
   },
   "eslintConfig": {
     "extends": "react-app"
